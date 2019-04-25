@@ -19,8 +19,10 @@ const signup = async (req, res) => {
         .catch(err => {
             res.status(400).json({error: "Username already exists"})
         })
-        req.session = { username: result.username }
-        res.json(result);
+        req.session.user = { username: result[0].username } //with every req that a user does, theres username
+        res.json({username: result [0].username, 
+        balance: result[0].balance})
+        // res.json(result); //initially you're returning result but its going to be action.payload.data
 //before we save username,pw we want to hash it so it doesnt show up in plain text
 //for hashing, we need bcryptjs
 //use postman to text backend if front end is not built

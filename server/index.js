@@ -24,14 +24,15 @@ massive(CONNECTION_STRING)
 app.use(express.json());
 
 app.use(
-    session({secret: SESSION_SECRET , resave: false, saveUninitialezed: true, cookie: {
+    session({secret: SESSION_SECRET , resave: false, saveUninitialized: true, cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7
-    } })
+    }})
 );
 
 //app.post because you're trying to add to the db
 //this info should be held in req.body
 app.post("/auth/signup", auth_controller.signup)
+app.post("/auth/login", auth_controller.login)
 //going to create the signup function but havent created it yet
 
 app.listen(SERVER_PORT, () => console.log(`listening on ${SERVER_PORT}` ))
